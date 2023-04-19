@@ -56,6 +56,9 @@ user_route.get('/home',userController.loadDashboard)
 
 user_route.post('/save-chat',userController.saveChat)
 
+//search users
+user_route.post('/search',userController.searchUser)
+
 
 user_route.get('*',function(req, res){
     res.redirect('/')

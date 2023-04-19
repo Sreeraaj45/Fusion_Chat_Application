@@ -121,6 +121,12 @@ const saveChat = async(req, res) => {
     }
 }
 
+const searchUser = async(req, res) => {
+    const searchTerm = req.query.term;
+    const users = await User.find({ name: { $regex: searchTerm, $options: 'i' } }).fetch();
+    res.json({ users });
+}
+
 
 
 module.exports = {
@@ -130,5 +136,6 @@ module.exports = {
     login,
     loadDashboard,
     logout,
-    saveChat
+    saveChat,
+    searchUser
 }

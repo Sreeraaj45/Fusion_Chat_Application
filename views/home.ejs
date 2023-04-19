@@ -340,13 +340,12 @@
                         </div>
 
 
+
+
                         <div class="category">
                             <h6 class="active" id="personal">Personal</h6>
                             <h6 id="communities">Communities</h6>
                         </div>
-
-
-
 
                         <div  class="message-list" id="message-list-personal">
                             <!-- Personal messages -->
@@ -731,6 +730,21 @@
             scrollTop: $('#chat-container').offset().top + $('#chat-container')[0].scrollHeight
         },0)
     }
+
+    const searchInput = document.querySelector('#message-search')
+    const searchResults = document.querySelector('#message-list-personal')
+
+    searchInput.addEventListener('input', async() => {
+        const searchTerm = searchInput.value
+        const response = await fetch(`/search?term=${searchTerm}`);
+        const { users } = await response.json();
+        searchResults.innerHTML = '';
+        users.forEach(user => {
+        const userElement = document.createElement('div');
+        userElement.textContent = user.name;
+        searchResults.appendChild(userElement);
+    });
+    })
 
 
 </script>
