@@ -1,0 +1,611 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fusion Homepage</title>
+    <!-- ICONS REFERENCE -->
+    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.8/css/line.css">
+    <!-- STYLESHEET -->
+    <link rel="stylesheet" href="./public/try.css">
+    <link rel="icon" type="image/x-icon" href="Fusion.png">
+</head>
+<body>
+    <nav>
+         <div class = "container">
+            <h2 class = "log">
+                FUSION
+            </h2>
+            <div class = "search-bar">
+                <i class="uil uil-search"></i>
+                <input type="search" placeholder="Search For People and Communities">
+            </div>
+            <div class="create">
+                    <i class="uil uil-signout"></i>
+            </div>
+         </div>
+    </nav>
+
+    <!--------------------- main -------------------------->
+    <main>
+        <div class="container">
+            <!--============ left ==============-->
+            <div class="left">
+                <a class="profile">
+                    <div class="profile-photo">
+                        <img src="<%= users[0]['image'] %>" alt="" width="50px" height="100px">
+                    </div>
+                    <div class="handle">
+                        <h4><%=users[0].name%></h4>
+                    </div>
+                </a>
+
+                <!------------ Sidebar ------------->
+                <div class="sidebar">
+                    <a class="menu-item active">
+                        <span><i class="uil uil-estate"></i></span><h3>Home</h3> 
+                    </a>
+                    <a class="menu-item" id="notifications">
+                        <span><i class="uil uil-bell"> <small class="notification-count">9+</small> </i></span><h3>Notifications</h3>
+                        <!-- Popup Notification -->
+                        <div class="notifications-popup">
+                            <div>
+                                <div class="profile-photo">
+                                    <img src="profile-2.jpg">
+                                </div>
+                                <div class="notification-body">
+                                    <b>Pranav Srinivas</b> accepted your friend request
+                                    <small class="text-muted">2 DAYS AGO</small> 
+                                </div>
+                            </div>
+                            <div>
+                                <div class="profile-photo">
+                                    <img src="profile-3.jpg">
+                                </div>
+                                <div class="notification-body">
+                                    <b>Rithwik Reddy</b> commented on your post
+                                    <small class="text-muted">1 HOUR AGO</small> 
+                                </div>
+                            </div>
+                            <div>
+                                <div class="profile-photo">
+                                    <img src="profile-4.jpg">
+                                </div>
+                                <div class="notification-body">
+                                    <b>Sai Pavan</b> and <b>100 others </b> liked your post
+                                    <small class="text-muted">4 MINUTES AGO</small> 
+                                </div>
+                            </div>
+                            <div>
+                                <div class="profile-photo">
+                                    <img src="profile-5.png">
+                                </div>
+                                <div class="notification-body">
+                                    <b>Eswar Naik</b> commented on a post you are tagged
+                                    <small class="text-muted">1 DAYS AGO</small> 
+                                </div>
+                            </div>
+                            <div>
+                                <div class="profile-photo">
+                                    <img src="profile-6.jpg">
+                                </div>
+                                <div class="notification-body">
+                                    <b>Musk Mama</b> commented on your post
+                                    <small class="text-muted">1 HOUR AGO</small> 
+                                </div>
+                            </div>
+                        </div>
+                        <!-- END OF POPUP NOTIFICATION -->
+                    </a>
+                    <a class="menu-item" id="messages-notification">
+                        <span><i class="uil uil-envelope-alt"><small class="notification-count">6</small></i></span><h3>Messages</h3>
+                    </a>
+                    <a class="menu-item" id="theme">
+                        <span><i class="uil uil-palette"></i></i></span><h3>Theme</h3>
+                    </a>
+                    <a class="menu-item">
+                        <span><i class="uil uil-cog"></i></i></span><h3>Settings</h3>
+                    </a>
+
+                </div>
+                <!-- END OF SIDEBAR -->
+                <label for="create-post" class="btn btn-primary">Create Post</label>
+            </div>
+             <!-- END OF LEFT-SIDE -->
+
+
+
+            <!--=============== middle =====================-->
+            <div class="middle">
+                <form class="create-post">
+                    <div class="profile-photo">
+                        <img src="<%= users[0]['image'] %>" alt="" width="50px" height="100px">
+                    </div>
+                    <input type="text" placeholder="What's on your mind, <%=user.name %>?">
+                    <input type="submit" value="Post" class="btn btn-primary">
+                </form>
+
+                <!-- FEEDS -->
+                <div class="feeds">
+                    <!-- FEED - 1 -->
+                    <div class="feed">
+                        <div class="head">
+                            <div class="user">
+                                <div class="profile-photo">
+                                    <img src="profile-2.jpg">
+                                </div>
+                                <div class="ingo">
+                                    <h3>Pranav Srinivas</h3>
+                                    <small><i class="uil uil-map-pin-alt">&nbsp;</i>Dharwad, 20 MINUTES AGO</small>
+                                </div>
+                            </div>
+                            <span class="edit">
+                                <i class="uil uil-ellipsis-h"></i>
+                            </span>
+                        </div>
+
+                        <div class="photo">
+                            <img src="feed-1.jpg">
+                            <div class="overlay">
+                                <div class="content">
+                                    <span><i class="uil uil-share-alt">&nbsp;</i><b>Share</b></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="caption">
+                            <p><b>What a Series🥰</b>
+                                <span class="hash-tag">#YourLieApril</span></p>
+                        </div>
+                        <div class="action-buttons">
+                            <div class="interaction-buttons">
+                                <span class="like-button"><i class="uil uil-star"></i>&nbsp<span class="like-count">280</span></span>
+                            </div>
+                        </div>
+                        <div class="comments text-muted">View Comments<i class="uil uil-comment-alt-download"></i></div>
+                    </div>
+                    <!-- END OF FEED - 1 -->
+
+                    <!-- FEED - 2 -->
+                    <div class="feed">
+                        <div class="head">
+                            <div class="user">
+                                <div class="profile-photo"> 
+                                    <img src="profile-3.jpg">
+                                </div>
+                                <div class="ingo">
+                                    <h3>Rithwik Reddy</h3>
+                                    <small><i class="uil uil-map-pin-alt">&nbsp;</i>Hyderabad, 10 MINUTES AGO</small>
+                                </div>
+                            </div>
+                            <span class="edit">
+                                <i class="uil uil-ellipsis-h"></i>
+                            </span>
+                        </div>
+
+                        <div class="photo">
+                            <img src="feed-2.jpg">
+                            <div class="overlay">
+                                <div class="content">
+                                    <span><i class="uil uil-share-alt">&nbsp;</i><b>Share</b></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="caption">
+                            <p><b>Hyderabadi Biriyani 😋😋😋</b>
+                                <span class="hash-tag">#Biriyani</span></p>
+                        </div>
+                        <div class="action-buttons">
+                            <div class="interaction-buttons">
+                                <span class="like-button"><i class="uil uil-star"></i>&nbsp<span class="like-count">140</span></span>
+                            </div>
+                        </div>
+                        <div class="comments text-muted">View Comments<i class="uil uil-comment-alt-download"></i></div>
+                    </div>
+                    <!-- END OF FEED - 2 -->
+
+                    <!-- FEED - 3 -->
+                    <div class="feed">
+                        <div class="head">
+                            <div class="user">
+                                <div class="profile-photo">
+                                    <img src="profile-4.jpg">
+                                </div>
+                                <div class="ingo">
+                                    <h3>Sai Pavan Donga</h3>
+                                    <small><i class="uil uil-map-pin-alt">&nbsp;</i>Palakollu, 50 MINUTES AGO</small>
+                                </div>
+                            </div>
+                            <span class="edit">
+                                <i class="uil uil-ellipsis-h"></i>
+                            </span>
+                        </div>
+
+                        <div class="photo">
+                            <img src="feed-3.jpg">
+                            <div class="overlay">
+                                <div class="content">
+                                    <span><i class="uil uil-share-alt">&nbsp;</i><b>Share</b></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="caption">
+                            <p><b>Battai Army🍊🍊</b>
+                                <span class="hash-tag">#Srh #DavidWarner</span></p>
+                        </div>
+                        <div class="action-buttons">
+                            <div class="interaction-buttons">
+                                <span class="like-button"><i class="uil uil-star"></i>&nbsp<span class="like-count">50</span></span>
+                            </div>
+                        </div>
+                        <div class="comments text-muted">View Comments<i class="uil uil-comment-alt-download"></i></div>
+                    </div>
+                    <!-- END OF FEED - 3 -->
+                    
+                    <!-- FEED - 4 -->
+                    <div class="feed">
+                        <div class="head">
+                            <div class="user">
+                                <div class="profile-photo">
+                                    <img src="profile-5.png">
+                                </div>
+                                <div class="ingo">
+                                    <h3>Eswar Naik</h3>
+                                    <small><i class="uil uil-map-pin-alt">&nbsp;</i>Nepal, 1 HOUR AGO</small>
+                                </div>
+                            </div>
+                            <span class="edit">
+                                <i class="uil uil-ellipsis-h"></i>
+                            </span>
+                        </div>
+
+                        <div class="photo">
+                            <img src="feed-4.jpg">
+                            <div class="overlay">
+                                <div class="content">
+                                    <span><i class="uil uil-share-alt">&nbsp;</i><b>Share</b></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="caption">
+                            <p><b>Nepal 💖💖</b>
+                                <span class="hash-tag">#nepal</span></p>
+                        </div>
+                        <div class="action-buttons">
+                            <div class="interaction-buttons">
+                                <span class="like-button"><i class="uil uil-star"></i>&nbsp<span class="like-count">580</span></span>
+                            </div>
+                        </div>
+                        <div class="comments text-muted">View Comments<i class="uil uil-comment-alt-download"></i></div>
+                    </div>
+                    <!-- END OF FEED - 4 -->
+
+                    <!-- FEED - 5 -->
+                    <div class="feed">
+                        <div class="head">
+                            <div class="user">
+                                <div class="profile-photo">
+                                    <img src="profile-6.jpg">
+                                </div>
+                                <div class="ingo">
+                                    <h3>Elon Musk</h3>
+                                    <small><i class="uil uil-map-pin-alt">&nbsp;</i>California, 10 HOUR AGO</small>
+                                </div>
+                            </div>
+                            <span class="edit">
+                                <i class="uil uil-ellipsis-h"></i>
+                            </span>
+                        </div>
+
+                        <div class="photo">
+                            <img src="feed-5.jpeg">
+                            <div class="overlay">
+                                <div class="content">
+                                    <span><i class="uil uil-share-alt">&nbsp;</i><b>Share</b></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="caption">
+                            <p><b>Model Y</b>
+                                <span class="hash-tag">#tesla</span></p>
+                        </div>
+                        <div class="action-buttons">
+                            <div class="interaction-buttons">
+                                <span class="like-button"><i class="uil uil-star"></i>&nbsp<span class="like-count">958579</span></span>
+                            </div>
+                        </div>
+                        <div class="comments text-muted">View Comments<i class="uil uil-comment-alt-download"></i></div>
+                    </div>
+                    <!-- END OF FEED - 5 -->
+    
+                </div>
+                <!---------------------- END OF FEED ----------------->
+            </div>
+
+
+            <!--===================== right =======================-->
+            <div class="right">
+                <div class="messages">
+                        <div class="heading">
+                            <h4>Messsages</h4>
+                            <i class="uil uil-angle-down"></i>
+                        </div>
+
+
+                        <div class="search-bar">
+                            <i class="uil uil-search" style="text-align: center; font-size: 1.8rem; color: gray;"></i>
+                            <input type="search" placeholder="Search Messsages" id="message-search">
+                        </div>
+
+
+                        <div class="category">
+                            <h6 class="active" id="personal">Personal</h6>
+                            <h6 id="communities">Communities</h6>
+                        </div>
+
+
+
+
+                        <div  class="message-list" id="message-list-personal">
+                            <!-- Personal messages -->
+                            <!-- Message 1 -->
+                                <div class="message">
+                                    <div class="profile-photo">
+                                    <img src="profile-2.jpg">
+                                    </div>
+                                    <div class="message-body">
+                                    <h5>Pranav Srinivas</h5>
+                                    <p class="text-bold">6 new messages</p>
+                                    </div>
+                                </div>
+                        </div>
+                      
+                      <div class="chat-popup" id="myChat">
+                        <div class="chat-header">
+                          <img src="profile-2.jpg" class="profile-photo">
+                          <h4>Pranav Srinivas</h4>
+                          <button class="close-btn" onclick="closeChat()" id="closeBtn"><i class="uil uil-multiply"></i></button>
+                        </div>
+                        <hr style="height: 2px; background-color: #ccc;">
+
+                        <div class="chat-messages" style="height: 410px; overflow: auto;">
+                        </div>
+                        <div>
+                          <form class="chat-form" onsubmit="sendMessage(); return false;">
+                            <input type="text" id="messageInput" placeholder="Type Your Message Here.....">
+                            <button class="photo-btn"><i class="uil uil-paperclip"></i></button>&nbsp;&nbsp;
+                            <button type="submit" class="btn btn-primary">Send</button>
+                          </form>
+                        </div>
+                      </div>
+                      
+                    <!------------------------- Message 2 ------------------------------>
+                    <!-- <div class="message">
+                        <div class="profile-photo">
+                            <img src="profile-3.jpg">
+                        </div>
+                        <div class="message-body">
+                            <h5>Rithwik Reddy</h5>
+                            <p class="text-muted">Hmm</p>
+                        </div>
+                    </div> -->
+                    
+                    <!------------------------- Message ------------------------------>
+                    <!-- <div class="message">
+                        <div class="profile-photo">
+                            <img src="profile-4.jpg">
+                        </div>
+                        <div class="message-body">
+                            <h5>Sai Pavan Donga</h5>
+                            <p class="text-muted">Just woke up bruh</p>
+                        </div>
+                    </div> -->
+                    <!------------------------- Message ------------------------------>
+                    <!-- <div class="message">
+                        <div class="profile-photo">
+                            <img src="profile-5.png">
+                
+                        </div>
+                        <div class="message-body">
+                            <h5>Eswar Naik</h5>
+                            <p class="text-bold">Reacted with 🤩</p>
+                        </div>
+                    </div> -->
+                    <!------------------------- Message ------------------------------>
+
+
+                  <div class="message-list" id="message-list-communities" style="display: none;">
+                    <!-- Communities messages -->
+                    <div class="create-community">
+                        <i class="uil uil-plus"></i>
+                        <h5>Create Communities</h5>
+                      </div>
+                      
+                      <div class="form-popup" id="form-popup">
+                        <form>
+                          <button type="button" class="close-btn"><i class="uil uil-times-circle"></i></button>
+                          <h4>Group Name:</h4>
+                          <input type="text" id="group-name" name="group-name">
+                          <h4>Upload Photo:</h4>
+                          <input type="file" id="photo-upload" name="photo-upload">
+                          <img id="preview">
+                          <button class="btn btn-primary"> Create </button>
+                        </form>
+                      </div>
+                      
+                      
+
+                    <!-- Community Chat 1 -->
+                        <div class="message">
+                            <div class="profile-photo">
+                                <img src="Fusion.png">
+                            </div>
+                            <div class="message-body">
+                                <h5>Fusion Team</h5>
+                                <p class="text-muted"> <b>Sreeraaj :</b> Work done</p>
+                            </div>
+                        </div>
+                        <!-- End Of Community Chat 1 -->
+
+
+                        <!-- Community Chat 2 -->
+                        <div class="message">
+                            <div class="profile-photo">
+                                <img src="Community-2.jpg">
+                            </div>
+                            <div class="message-body">
+                                <h5>Weebs</h5>
+                                <p class="text-muted"> <b>Pranav :</b>The New Episode Was lit 🔥</p>
+                            </div>
+                        </div>
+                        <!-- End Of Community Chat 2 -->
+
+                        <!-- Community Chat 3 -->
+                        <div class="message">
+                            <div class="profile-photo">
+                                <img src="Community-3.jpeg">
+                            </div>
+                            <div class="message-body">
+                                <h5>Foodies</h5>
+                                <p class="text-muted"> <b>Pavan :</b>Let's Order Biriyani Tonight</p>
+                            </div>
+                        </div>
+                    <!-- End Of Community Chat 3 -->
+                  </div>
+                </div>
+                <!------------------------ End of Messages -------------->
+                
+
+                
+                <!---------------------- Friend Requests ---------------->
+                <div class="friend-requests">
+                    <h4>Requests</h4>
+                    <div class="request">
+                        <div class="info">
+                            <div class="profile-photo">
+                                <img src="profile-7.jpeg">
+                            </div>
+                            <div>
+                                <h5>Sujith Makam</h5>
+                                <p class="text-muted">
+                                    5 mutual friends
+                                </p>
+                            </div>
+                        </div>
+                        <div class="action">
+                            <button class="btn btn-primary">
+                                Accept
+                            </button>
+                            <button class="btn">
+                                Decline
+                            </button>
+                        </div>
+                    </div>
+                    <!-- Request - 2 -->
+                    <div class="request">
+                        <div class="info">
+                            <div class="profile-photo">
+                                <img src="profile-9.jpg">
+                            </div>
+                            <div>
+                                <h5>Arun Rayachoti</h5>
+                                <p class="text-muted">
+                                    8 mutual friends
+                                </p>
+                            </div>
+                        </div>
+                        <div class="action">
+                            <button class="btn btn-primary">
+                                Accept
+                            </button>
+                            <button class="btn">
+                                Decline
+                            </button>
+                        </div>
+                    </div>
+                    <!-- Request - 3 -->
+                    <div class="request">
+                        <div class="info">
+                            <div class="profile-photo">
+                                <img src="profile-8.jpg">
+                            </div>
+                            <div>
+                                <h5>Sathwik Narkedimilli</h5>
+                                <p class="text-muted">
+                                    7 mutual friends
+                                </p>
+                            </div>
+                        </div>
+                        <div class="action">
+                            <button class="btn btn-primary">
+                                Accept
+                            </button>
+                            <button class="btn">
+                                Decline
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- END OF RIGHT -->
+        </div>
+    </main>
+
+
+    <!--============================= THEME CUSTOMIZATION ============================  -->
+    <div class="customize-theme">
+        <div class="card">
+            <h2>Customize your view</h2>
+            <p class="text-muted">Manage your Font Size, Color, and Background</p>
+
+            <!----------- FONT-SIZES  ------------------->
+            <div class="font-size">
+                <h4>Font Size</h4>
+                <div>
+                    <h6>Aa</h6>
+                    <div class="choose-size">
+                        <span class="font-size-1"></span>
+                        <span class="font-size-2"></span>
+                        <span class="font-size-3 active"></span>
+                        <span class="font-size-4"></span>
+                        <span class="font-size-5"></span>
+                    </div>
+                    <h3>Aa</h3>
+                </div>
+            </div>
+            
+            <!-- PRIMARY COLORS -->
+            <div class="color">
+                <h4>color</h4>
+                <div class="choose-color">
+                    <span class="color-1 active"></span>
+                    <span class="color-2"></span>
+                    <span class="color-3"></span>
+                    <span class="color-4"></span>
+                    <span class="color-5"></span>
+                </div>
+            </div>
+
+            <!-- BACKGROUND COLOR -->
+            <div class="background">
+                <h4>Background</h4>
+                <div class="choose-bg">
+                    <div class="bg-1 active">
+                        <span></span>
+                        <h5 for = "bg-1">Light</h5>
+                    </div>
+                    <div class="bg-2">
+                        <span></span>
+                        <h5>Dim</h5>
+                    </div>
+                    <div class="bg-3">
+                        <span></span>
+                        <h5 for = "bg-3">Lights Out</h5>
+                    </div>
+                </div>
+            </div>
+    </div>
+
+<script src="./public/index.js"></script>
+</body>
+</html>
