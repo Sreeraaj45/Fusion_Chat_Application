@@ -34,7 +34,7 @@
         <div class="container">
             <!--============ left ==============-->
             <div class="left">
-                <a class="profile">
+                <a class="profile" href="/profile">
                     <div class="profile-photo">
                         <img src="<%= users[0]['image'] %>" alt="" width="50px" height="100px">
                     </div>
@@ -328,6 +328,7 @@
             <!--===================== right =======================-->
             <div class="right">
                 <div class="messages">
+
                         <div class="heading">
                             <h4>Messsages</h4>
                             <i class="uil uil-angle-down"></i>
@@ -339,63 +340,56 @@
                             <input type="search" placeholder="Search Messsages" id="message-search">
                         </div>
 
-
-
-
                         <div class="category">
                             <h6 class="active" id="personal">Personal</h6>
                             <h6 id="communities">Communities</h6>
                         </div>
 
                         <div  class="message-list" id="message-list-personal">
-                            <!-- Personal messages -->
-                            <!-- Message 1 -->
-                                <% 
-                                    if(frnds.length > 0){
-                                        for(let i=0; i < frnds.length; i++){
-                                            %>
-                                                    <div class="message" data-id="<%= frnds[i]['_id'] %>">
-                                                        <div class="profile-photo">
-                                                            <img src="<%= frnds[i]['image'] %>" alt="">
+                                    <% 
+                                        if(frnds.length > 0){
+                                            for(let i=0; i < frnds.length; i++){
+                                                %>
+                                                        <div class="message" data-id="<%= frnds[i]['_id'] %>">
+                                                            <div class="profile-photo">
+                                                                <img src="<%= frnds[i]['image'] %>" alt="">
+                                                            </div>
+                                                            <div class="message-body">
+                                                                <h5><%= frnds[i]['name'] %></h5>
+                                                                <p class="text-bold">Say Hi 👋</p>
+                                                            </div>
                                                         </div>
-                                                        <div class="message-body">
-                                                            <h5><%= frnds[i]['name'] %></h5>
-                                                            <p class="text-bold">Say Hi 👋</p>
-                                                        </div>
-                                                    </div>
-                                            <%
+                                                <%
+                                            }
                                         }
-                                    }
-                                %>
+                                    %>
                         </div>
                       
-                      <div class="chat-popup" id="myChat">
+                    <div class="chat-popup" id="myChat">
 
-                            <div class="chat-header">
-                                <!-- <img src="profile-2.jpg" class="profile-photo">
-                                <h4>Pranav Srinivas</h4> -->
-                                <button class="close-btn" onclick="closeChat()" id="closeBtn"><i class="uil uil-multiply"></i></button>
-                            </div>
-                            
-                            <hr style="height: 2px; background-color: #ccc;">
-
-                            <div id="chat-container">
+                                <div class="chat-header">
+                                    <button class="close-btn" onclick="closeChat()" id="closeBtn"><i class="uil uil-multiply"></i></button>
+                                </div>
                                 
-                            </div>
+                                <hr style="height: 2px; background-color: #ccc;">
 
-                            <div>
+                                <div id="chat-container">
+                                    
+                                </div>
 
-                            <form id="chat-form">
+                                <div>
+
+                                    <form id="chat-form">
 
 
-                                <input type="text" id="message" placeholder="Type Your Message Here.....">
-                                <!-- <button class="photo-btn"><i class="uil uil-paperclip"></i></button>&nbsp;&nbsp; -->
-                                <input type="submit" class="btn btn-primary" value="Send"/>
+                                        <input type="text" id="message" placeholder="Type Your Message Here.....">
+                                        <!-- <button class="photo-btn"><i class="uil uil-paperclip"></i></button>&nbsp;&nbsp; -->
+                                        <input type="submit" class="btn btn-primary" value="Send"/>
+                                        
+                                    </form>
                                 
-                            </form>
-                            
-                            </div>
-                      </div>
+                                </div>
+                    </div>
                       
                     <!------------------------- Message 2 ------------------------------>
                     <!-- <div class="message">
@@ -432,42 +426,63 @@
                     <!------------------------- Message ------------------------------>
 
 
-                  <div class="message-list" id="message-list-communities" style="display: none;">
-                    <!-- Communities messages -->
-                    <div class="create-community">
-                        <i class="uil uil-plus"></i>
-                        <h5>Create Communities</h5>
-                      </div>
-                      
-                      <div class="form-popup" id="form-popup">
-                        <form>
-                          <button type="button" class="close-btn"><i class="uil uil-times-circle"></i></button>
-                          <h4>Group Name:</h4>
-                          <input type="text" id="group-name" name="group-name">
-                          <h4>Upload Photo:</h4>
-                          <input type="file" id="photo-upload" name="photo-upload">
-                          <img id="preview">
-                          <button class="btn btn-primary"> Create </button>
-                        </form>
-                      </div>
-                      
-                      
+                    <div class="message-list" id="message-list-communities" style="display: none;">
+                        <!-- Communities messages -->
+                    
+                                    <div class="create-community">
+                                        <i class="uil uil-plus"></i>
+                                        <h5 style="color:black">Create Community</h5>
+                                    </div>
+                                
+                                    <div class="form-popup" id="form-popup">
+                                        <form action="/communities" method="POST" enctype="multipart/form-data">
+                                            <button type="button" class="close-btn"><i class="uil uil-times-circle"></i></button>
+                                            <h4>Group Name:</h4>
+                                            <input type="text" id="group-name" name="group_name" required>
+                                            <h4>Description:</h4>
+                                            <input type="text" id="group-desc" name="group_desc" required>
+                                            <h4>Group Image:</h4>
+                                            <input type="file" id="image" name="image">
+                                            <button class="btn btn-primary">Create</button>
+                                        </form>
+                                    </div>
+                    
+                        <!-- Community Chat 1 -->
+                        
 
-                    <!-- Community Chat 1 -->
-                        <div class="message">
-                            <div class="profile-photo">
-                                <img src="Fusion.png">
-                            </div>
-                            <div class="message-body">
-                                <h5>Fusion Team</h5>
-                                <p class="text-muted"> <b>Sreeraaj :</b> Work done</p>
-                            </div>
-                        </div>
+                        <% 
+                                if(groups.length > 0){
+                            
+                                for(let i=0; i < groups.length; i++){
+                                    %>
+                                        <div class="group-message">
+                                            <div class="profile-photo">
+                                                <img src="<%= groups[i]['image'] %>" alt="">
+                                            </div>
+                                            <div class="group-message-body">
+                                                <h5><%= groups[i]['name'] %></h5>
+                                                <p class="text-bold">Welcome to the Community 👋👋</p>
+                                                <button class="add-member-btn" data-group-id="<%= groups[i]['_id'] %>">Add a Member</button>
+                                            </div>
+                                        </div>
+                                    <%
+                                }
+                            }
+                                else{
+                                    %>
+                                        <div class="message">
+                                            <h5>No Communities Joined Yet!! 🥲</h5>
+                                        </div>
+                                    <%
+                                }
+                        %>
+                    
+
+
                         <!-- End Of Community Chat 1 -->
-
-
+                    
                         <!-- Community Chat 2 -->
-                        <div class="message">
+                        <!-- <div class="message">
                             <div class="profile-photo">
                                 <img src="Community-2.jpg">
                             </div>
@@ -475,11 +490,11 @@
                                 <h5>Weebs</h5>
                                 <p class="text-muted"> <b>Pranav :</b>The New Episode Was lit 🔥</p>
                             </div>
-                        </div>
+                        </div> -->
                         <!-- End Of Community Chat 2 -->
-
+                    
                         <!-- Community Chat 3 -->
-                        <div class="message">
+                        <!-- <div class="message">
                             <div class="profile-photo">
                                 <img src="Community-3.jpeg">
                             </div>
@@ -487,9 +502,9 @@
                                 <h5>Foodies</h5>
                                 <p class="text-muted"> <b>Pavan :</b>Let's Order Biriyani Tonight</p>
                             </div>
-                        </div>
-                    <!-- End Of Community Chat 3 -->
-                  </div>
+                        </div> -->
+                        <!-- End Of Community Chat 3 -->
+                    </div>                    
                 </div>
                 <!------------------------ End of Messages -------------->
                 
@@ -649,14 +664,15 @@
 
           socket.emit('existsChat', {sender_id: sender_id, receiver_id: receiver_id})
             
-        });
+        }); 
     });
 
     $('#chat-form').submit(function(event){
         event.preventDefault()
-
+    
         var message =  $('#message').val()
-
+        var timestamp = new Date().toLocaleString(); // Get the current time
+    
         $.ajax({
             url: '/save-chat',
             type: 'POST',
@@ -668,7 +684,8 @@
                     let chat = response.data.message
                     let html = `
                         <div class='current-user-chat' id='`+response.data._id+`'>
-                            <h5>`+chat+`</h5>
+                            <h5 class='message-chat'>`+chat+`</h5>
+                            <p class='chat-timestamp'>`+timestamp+`</p>
                         </div>
                     `
                     $('#chat-container').append(html)
@@ -682,12 +699,17 @@
             
         })
     })
+    
 
     socket.on('loadNewChat', function(data){
+
+        var timestamp = new Date().toLocaleString(); // Get the current time
+
         if(sender_id == data.receiver_id && receiver_id == data.sender_id){
             let html = `
             <div class='distant-user-chat' id='`+data._id+`'>
-                <h5>`+data.message+`</h5>
+                <h5 class='message-chat'>`+data.message+`</h5>
+                <p class='chat-timestamp'>`+timestamp+`</p>
             </div>
         `
         $('#chat-container').append(html)
@@ -696,6 +718,9 @@
     })
 
     socket.on('loadChats', function(data){
+
+        var timestamp = new Date().toLocaleString(); // Get the current time
+
         $('#chat-container').html('')
 
         var chats = data.chats
@@ -714,7 +739,8 @@
 
             html += `
                 <div class='`+addClass+`'>
-                    <h5>`+chats[x]['message']+`</h5>
+                    <h5 class='message-chat'>`+chats[x]['message']+`</h5>
+                    <p class='chat-timestamp'>`+timestamp+`</p>
                 </div>
                 `;
         }
@@ -745,6 +771,61 @@
         searchResults.appendChild(userElement);
     });
     })
+
+    const createCommunityBtn = document.querySelector('.create-community')
+    const formPopup = document.querySelector('#form-popup')
+    const closeBtn = document.querySelector('.close-btn')
+    
+    createCommunityBtn.addEventListener('click',()=>{
+        formPopup.style.display = 'block'
+    })
+
+    closeBtn.addEventListener('click',()=>{
+        formPopup.style.display = 'none'
+    })
+
+    const addMemberButtons = document.querySelectorAll('.add-member-btn');
+
+    addMemberButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            const groupId = button.getAttribute('data-group-id');
+            const name = prompt('Enter member name:');
+            const email = prompt('Enter member email:');
+
+            fetch(`/groups/${groupId}/members`, {
+                method: 'POST',
+                body: JSON.stringify({ name, email }),
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            })
+            .then(response => {
+                if (response.ok) {
+                    alert('Member added to group successfully');
+                } else {
+                    alert('Failed to add member to group');
+                }
+            })
+            .catch(error => {
+                console.error('Failed to add member to group:', error);
+            });
+        });
+    });
+
+    const mesageDivs = document.querySelectorAll('.message')
+
+    mesageDivs.forEach(mesageDiv => {
+        mesageDiv.addEventListener('click', ()=>{
+            mesageDivs.forEach(div => {
+                div.classList.remove('active')
+            })
+
+            mesageDiv.classList.add('active')
+        })
+    })
+
+
+
 
 
 </script>

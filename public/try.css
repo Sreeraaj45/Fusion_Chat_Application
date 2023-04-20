@@ -556,6 +556,13 @@ main .container .right{
     align-items: start;
 } 
 
+.group-message{
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1rem;
+    align-items: start;
+} 
+
 .right .messages .profile-photo{
     position: relative;
     overflow: visible;
@@ -572,6 +579,14 @@ main .container .right{
 .right .messages .message p {
     font-size: 0.8rem;
 
+}
+
+.group-message p{
+    font-size: 0.8rem;
+}
+
+.group-message:last-child{
+    margin: 0;
 }
 
 .right .messages .message .profile-photo .active{
@@ -1098,6 +1113,10 @@ main .container .right{
     flex: 1 1 auto;
   }
 
+  .group-message-body {
+    flex: 1 1 auto;
+  }
+
   .current-user-chat{
     text-align: right;
     margin: 10px;
@@ -1108,5 +1127,49 @@ main .container .right{
     text-align: left;
     margin: 10px;
     color: black;
+  }
+
+  #createGroup{
+    color: black
+  }
+
+  .add-member-btn {
+    background-image: linear-gradient(to right, #FFD54F, #FFB300);
+    background: var(--color-primary);
+    font-family: 'Poppins', sans-serif;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    font-size: 13px;
+    cursor: pointer;
+    margin-top: 10px;
+    height: auto;
+  }
+
+  /* hr {
+    border: none;
+    height: 1px;
+    background-color: wheat;
+    margin: 10px 0;
+  } */
+  
+  
+  .message.active{
+    background-color: #eee;
+  }
+
+  #message{
+    flex-grow: 1;
+    padding: 10px;
+    margin-right: 10px;
+    border-radius: 15px;
+    border: none;
+    font-size: 14px;
+  }
+
+  .chat-timestamp{
+    color: #888;
+    font-size: 12px;
   }
 

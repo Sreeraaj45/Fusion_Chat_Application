@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>FUSION || Profile_Page</title>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"/>
+    <!-- CSS -->
+    <link rel="stylesheet" href="profile.css" />
+  </head>
+  <body>
+    <div class="header__wrapper">
+      <header></header>
+      <div class="cols__container">
+        <div class="left__col">
+          <div class="img__container">
+            <img src="<%= users[0]['image'] %>" alt="Sreeraaj Manepalli" />
+            <span></span>
+          </div>
+          <h2><%=users[0].name%></h2>
+          <p></p>
+          <!-- <p>anna@example.com</p> -->
+
+          <ul class="about">
+            <li><span>10</span>Followers</li>
+            <li><span>10</span>Following</li>
+            <li><span>3</span>Communities Joined</li>
+          </ul>
+
+          <div class="content">
+            <p>
+              Student at IIIT Dharwad with a love for photography and travel.
+            </p>
+
+            <!-- <ul>
+              <li><i class="fab fa-twitter"></i></li>
+              <i class="fab fa-pinterest"></i>
+              <i class="fab fa-facebook"></i>
+              <i class="fab fa-dribbble"></i>
+            </ul> -->
+          </div>
+        </div>
+        <div class="right__col">
+          <nav>
+            <ul>
+              <li><a href="#" class="nav-link" onclick="showYourPosts()">Your Posts</a></li>
+              <li><a href="#" class="nav-link" onclick="showCommunities()">Communities</a></li>
+            </ul>
+          </nav>          
+
+          <div class="photos">
+            <img src="img_1.jpg" alt="Photos" />
+            <img src="img_2.jpg" alt="Photos" />
+            <img src="img_3.jpg" alt="Photos" />
+            <img src="img_4.avif" alt="Photos" />
+            <img src="img_5.avif" alt="Photos" />
+            <img src="img_6.avif" alt="Photos" />
+          </div>
+
+          <div id="content" class="content-transition"></div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+    function showYourPosts() {
+      // Replace the content with Your Posts content
+      document.getElementById("content").innerHTML = "";
+      
+      // Show the photos section
+      document.querySelector(".photos").style.display = "grid";
+
+      // Hide the content section with transition effect
+      document.querySelector("#content").classList.remove("show");
+
+      // Remove "active" class from Communities link
+      document.querySelector(".nav-link.active").classList.remove("active");
+      // Add "active" class to Your Posts link
+      document.querySelector(".nav-link:nth-child(1)").classList.add("active");
+    }
+
+    function showCommunities() {
+      // Replace the content with Communities content
+      document.getElementById("content").innerHTML = `
+      <ol>
+        <li>
+          <div class="community-chat">
+            <!-- Community Chat 1 -->
+            <div class="message">
+              <div class="profile-photo">
+                <img src="Fusion.png">
+              </div>
+              <div class="message-body">
+                <h3>Fusion Team</h3>
+              </div>
+            </div>
+            <!-- End Of Community Chat 1 -->
+          </div>
+        </li>
+
+        <li>
+          <div class="community-chat">
+            <!-- Community Chat 2 -->
+            <div class="message">
+              <div class="profile-photo">
+                <img src="weebs.jpg">
+              </div>
+              <div class="message-body">
+                <h3>Weebs</h3>
+              </div>
+            </div>
+            <!-- End Of Community Chat 2 -->
+          </div>
+        </li>
+
+        <li>
+          <div class="community-chat">
+            <!-- Community Chat 3 -->
+            <div class="message">
+              <div class="profile-photo">
+                <img src="foodie.jpeg">
+              </div>
+              <div class="message-body">
+                <h3>Foodie</h3>
+              </div>
+            </div>
+            <!-- End Of Community Chat 3 -->
+          </div>
+        </li>
+      </ol>
+      `;
+
+      // Hide the photos section
+      document.querySelector(".photos").style.display = "none";
+
+      // Show the content section with transition effect
+      document.querySelector("#content").classList.add("show");
+
+      // Remove "active" class from Your Posts link
+      document.querySelector(".nav-link.active").classList.remove("active");
+      // Add "active" class to Communities link
+      document.querySelector(".nav-link:nth-child(2)").classList.add("active");
+    }
+
+    </script>
+</html>
+

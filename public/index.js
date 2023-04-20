@@ -324,55 +324,55 @@ communitiesTab.addEventListener('click', () => {
     personalMessages.style.display = 'none';
   }
 });
-
+ 
 
 
 
 // Get the button and the form elements
-const createCommunityBtn = document.querySelector('.create-community h5');
-const formPopup = document.querySelector('.form-popup');
-const closeBtn = document.querySelector('.close-btn');
+const createCommunityBtn1 = document.querySelector('.create-community h5');
+const formPopup1 = document.querySelector('.form-popup');
+const closeBtn1 = document.querySelector('.close-btn');
 const previewImg = document.getElementById('preview');
-const fileInput = document.getElementById('photo-upload');
+// const fileInput = document.getElementById('photo-upload');
 
 // Function to open the form popup
 function openForm() {
-  formPopup.style.display = "block";
+  formPopup1.style.display = "block";
   document.body.style.overflow = "hidden"; // prevent scrolling in the background
 }
 
 // Function to close the form popup
 function closeForm() {
-  formPopup.style.display = "none";
+  formPopup1.style.display = "none";
   document.body.style.overflow = "auto"; // allow scrolling in the background again
 }
 
 // When the "Create Communities" button is clicked, open the form
-createCommunityBtn.addEventListener('click', openForm);
+createCommunityBtn1.addEventListener('click', openForm);
 
 // When the "X" button is clicked, close the form
-closeBtn.addEventListener('click', closeForm);
+closeBtn1.addEventListener('click', closeForm);
 
 // When the user clicks outside the form, close the form
 window.addEventListener('click', function(event) {
-  if (event.target == formPopup) {
+  if (event.target == formPopup1) {
     closeForm();
   }
 });
 
 // Preview the selected image
-fileInput.addEventListener('change', function() {
-  const file = fileInput.files[0];
-  const reader = new FileReader();
+// fileInput.addEventListener('change', function() {
+//   const file = fileInput.files[0];
+//   const reader = new FileReader();
 
-  reader.addEventListener('load', function() {
-    previewImg.src = reader.result;
-  });
+//   reader.addEventListener('load', function() {
+//     previewImg.src = reader.result;
+//   });
 
-  if (file) {
-    reader.readAsDataURL(file);
-  }
-});
+//   if (file) {
+//     reader.readAsDataURL(file);
+//   }
+// });
 
 
 

@@ -44,6 +44,9 @@ const upload = multer({storage: storage})
 user_route.get('/register',userController.registerLoad)
 user_route.post('/register',upload.single('image'),userController.register)
 
+//load Profile page
+user_route.get('/profile',userController.loadProfile)
+
 //Login user routes
 user_route.get('/',userController.loadLogin)
 user_route.post('/',userController.login)
@@ -59,6 +62,14 @@ user_route.post('/save-chat',userController.saveChat)
 //search users
 user_route.post('/search',userController.searchUser)
 
+
+// Group Chat Routes
+// user_route.get('/groups',userController.loadGroups)
+// user_route.post('/groups',userController.createGroups)
+
+user_route.post('/communities', upload.single('image'), userController.createCommunity)
+
+user_route.post('/groups/:groupId/members',userController.addMembers)
 
 user_route.get('*',function(req, res){
     res.redirect('/')

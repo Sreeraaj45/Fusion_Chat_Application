@@ -2,6 +2,7 @@ const express = require('express');
 const bcrypt = require('bcrypt');
 const User = require("../models/userModel");
 const Chat = require("../models/chatModel");
+const Group = require('../models/groupModel')
 const user_route = require('../routes/userRoutes');
 
 const registerLoad = async(req, res) => {
@@ -13,6 +14,18 @@ const registerLoad = async(req, res) => {
         console.log(error.message)
     }
 }
+
+const loadProfile = async(req, res) => {
+    try {
+        var users = await User.find({_id : {$eq: [req.session.user._id]}})
+        res.render('profile',{users:users})
+
+    } catch (error) {
+        console.log(error.message)
+    }
+}
+
+
 
 const register = async (req, res) => { 
     
@@ -85,7 +98,11 @@ const loadDashboard = async (req, res) => {
 
         var friends = await User.find({_id : {$nin: [req.session.user._id]}})
 
-        res.render('home',{user: req.session.user, users: users, frnds: friends})
+        var groups = await Group.find({creator_id : {$eq: [req.session.user._id]}})
+
+        console.log(groups)
+
+        res.render('home',{user: req.session.user, users: users, frnds: friends, groups: groups})
         
     } catch (error) { 
         console.log(error.message)
@@ -127,7 +144,89 @@ const searchUser = async(req, res) => {
     res.json({ users });
 }
 
+// const loadGroups = async (req, res) => {
+//     try {
 
+//         var users = await User.find({_id : {$eq: [req.session.user._id]}})
+
+//         var friends = await User.find({_id : {$nin: [req.session.user._id]}})
+
+//         res.render('group',{user: req.session.user, users: users, frnds: friends})
+        
+//     } catch (error) {
+//         console.log(error.message)
+//     }
+// }
+
+// const createGroups = async (req, res) => {
+//     try {
+
+//         console.log(req.body) 
+        
+//     } catch (error) {
+//         console.log(error.message)
+//     }
+// }
+
+const createCommunity = async (req, res) => {
+
+        try {
+
+            //console.log(req.body)
+            
+            const community = new Group({
+                creator_id: req.session.user._id,
+                name: req.body.group_name,
+                image: 'images/' + req.file.filename, 
+                description: req.body.group_desc,
+            });
+
+            await community.save()
+
+            // res.status(201).json({
+            //     message: "Community created succesfully!!"
+            // })
+
+         var users = await User.find({_id : {$eq: [req.session.user._id]}})
+
+         var friends = await User.find({_id : {$nin: [req.session.user._id]}})
+
+         var groups = await Group.find({creator_id : {$eq: [req.session.user._id]}})
+ 
+         res.render('home',{user: req.session.user, users: users, frnds: friends, groups: groups})
+
+        } catch (error) {
+            res.status(500).json({
+                message: 'Error creating community!',
+                error,
+              });
+        }
+            
+}
+
+
+const addMembers = async(req, res) => {
+
+
+    const groupId = req.params.groupId;
+    const name = req.body.name;
+    const email = req.body.email;
+
+    // Find user by name and email
+    const user = await User.findOne({name, email});
+
+    if (!user) {
+        return res.status(404).send('User not found');
+    } 
+
+    // Add member to the group in the database
+    const group = await Group.findByIdAndUpdate(groupId, {$push: {members: user}}, {new: true});
+
+    res.send('Member added to group successfully');
+
+}
+
+ 
 
 module.exports = {
     register,
@@ -137,5 +236,8 @@ module.exports = {
     loadDashboard,
     logout,
     saveChat,
-    searchUser
+    searchUser,
+    createCommunity,
+    addMembers,
+    loadProfile
 }
