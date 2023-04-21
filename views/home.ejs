@@ -350,13 +350,21 @@
                                         if(frnds.length > 0){
                                             for(let i=0; i < frnds.length; i++){
                                                 %>
-                                                        <div class="message" data-id="<%= frnds[i]['_id'] %>">
-                                                            <div class="profile-photo">
-                                                                <img src="<%= frnds[i]['image'] %>" alt="">
+
+                                                        <div class="containing">
+
+                                                            <div class="message" data-id="<%= frnds[i]['_id'] %>">
+                                                                <div class="profile-photo">
+                                                                    <img src="<%= frnds[i]['image'] %>" alt="">
+                                                                </div>
+                                                                <div class="message-body">
+                                                                    <h5><%= frnds[i]['name'] %></h5>
+                                                                    <p class="text-bold">Say Hi 👋</p>
+                                                                </div>
                                                             </div>
-                                                            <div class="message-body">
-                                                                <h5><%= frnds[i]['name'] %></h5>
-                                                                <p class="text-bold">Say Hi 👋</p>
+                                                            <div class="followDivision">
+                                                                <button class="follow-btn btn btn-primary" data-user-id="<%= frnds[i]['_id'] %>">Follow</button>
+
                                                             </div>
                                                         </div>
                                                 <%
@@ -369,7 +377,9 @@
 
                                 <div class="chat-header">
                                     <button class="close-btn" onclick="closeChat()" id="closeBtn"><i class="uil uil-multiply"></i></button>
+                                    <!-- <button class="btn btn-primary follow-btn" data-id="">Follow</button> -->
                                 </div>
+
                                 
                                 <hr style="height: 2px; background-color: #ccc;">
 
@@ -380,13 +390,14 @@
                                 <div>
 
                                     <form id="chat-form">
-
-
-                                        <input type="text" id="message" placeholder="Type Your Message Here.....">
-                                        <!-- <button class="photo-btn"><i class="uil uil-paperclip"></i></button>&nbsp;&nbsp; -->
-                                        <input type="submit" class="btn btn-primary" value="Send"/>
-                                        
+                                            <div style="display:flex;">
+                                                <input type="text" id="message" placeholder="Type Your Message Here....." style="flex-grow:1;margin-right:10px;">
+                                                <input type="datetime-local" id="send-time" style="max-width:200px;">
+                                            </div>
+                                            <br>
+                                            <button type="submit" class="btn btn-primary">Send</button>
                                     </form>
+                                      
                                 
                                 </div>
                     </div>
@@ -455,7 +466,7 @@
                             
                                 for(let i=0; i < groups.length; i++){
                                     %>
-                                        <div class="group-message">
+                                        <div class="group-message" data-group-id="<%= groups[i]['_id'] %>">
                                             <div class="profile-photo">
                                                 <img src="<%= groups[i]['image'] %>" alt="">
                                             </div>
@@ -649,6 +660,8 @@
 
     var receiver_id;
 
+    var frnd_id;
+
     var socket = io('/user-namespace', {
         auth:{
             token: '<%= user._id %>',
@@ -658,7 +671,26 @@
     $(document).ready(function () {
         $('.message').click(function () {
           var userId = $(this).data('id');
+
+          frnd_id = userId
+
+          console.log(frnd_id)
+
           receiver_id = userId;
+          //$('.start-head').hide();
+          $('.chat-popup').show();
+
+          socket.emit('existsChat', {sender_id: sender_id, receiver_id: receiver_id})
+            
+        }); 
+    });
+
+    $(document).ready(function () {
+        $('.group-message').click(function () {
+          var userId = $('.group-message').data('group-id');
+          receiver_id = userId;
+          console.log(sender_id)
+          console.log(receiver_id)
           //$('.start-head').hide();
           $('.chat-popup').show();
 
@@ -823,6 +855,56 @@
             mesageDiv.classList.add('active')
         })
     })
+
+    const chatForm = document.getElementById('chat-form');
+    const messageInput = document.getElementById('message');
+    const sendTimeInput = document.getElementById('send-time');
+
+    chatForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+
+        const message = messageInput.value;
+        const sendTime = new Date(sendTimeInput.value);
+
+        const currentTime = new Date();
+
+        if (sendTime <= currentTime) {
+            alert('Please select a future time to send the message');
+            return;
+        }
+
+        const timeUntilSend = sendTime - currentTime;
+
+        setTimeout(() => {
+            // Code to send the message
+        }, timeUntilSend);
+    });
+
+    document.querySelectorAll('.follow-btn').forEach(btn => {
+        btn.addEventListener('click', async () => {
+          const userId = btn.dataset.userId;
+          try {
+            const response = await fetch(`/users/follow/${userId}`, { method: 'POST' });
+            const user = await response.json();
+            console.log(`You are now following ${user.name}`);
+            // Update the UI to reflect that the user is now following this user
+            btn.textContent = 'Following'
+          } catch (err) {
+            console.log(err); 
+          }
+        });
+      });
+
+      /*function isFollowingUser(userId) {
+        return currentUser.following.includes(userId);
+      }
+
+      let followBtn = document.querySelector('#follow-btn');
+        if (isFollowingUser(otherUserId)) {
+            followBtn.textContent = 'Following';
+      }*/
+      
+
 
 
 

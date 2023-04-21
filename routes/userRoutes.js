@@ -71,6 +71,9 @@ user_route.post('/communities', upload.single('image'), userController.createCom
 
 user_route.post('/groups/:groupId/members',userController.addMembers)
 
+// setting up the routes for following
+user_route.post('/follow/:userId',userController.followUser)
+
 user_route.get('*',function(req, res){
     res.redirect('/')
 })  

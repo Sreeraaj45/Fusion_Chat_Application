@@ -3,7 +3,7 @@ const bcrypt = require('bcrypt');
 const User = require("../models/userModel");
 const Chat = require("../models/chatModel");
 const Group = require('../models/groupModel')
-const user_route = require('../routes/userRoutes');
+const user_route = require('../routes/userRoutes'); 
 
 const registerLoad = async(req, res) => {
     try {
@@ -25,8 +25,6 @@ const loadProfile = async(req, res) => {
     }
 }
 
-
-
 const register = async (req, res) => { 
     
     try {
@@ -47,7 +45,7 @@ const register = async (req, res) => {
 
         res.render('signup', {signup: 'Your Registration is done!!!',invalid:""})
 
-    } catch (error) { 
+    } catch (error) {  
         console.log(error.message)
     }
 
@@ -98,7 +96,12 @@ const loadDashboard = async (req, res) => {
 
         var friends = await User.find({_id : {$nin: [req.session.user._id]}})
 
-        var groups = await Group.find({creator_id : {$eq: [req.session.user._id]}})
+        var groups = await Group.find({
+            $or: [
+              { creator_id: req.session.user._id },
+              { 'members._id': req.session.user._id }
+            ]
+          });
 
         console.log(groups)
 
@@ -162,7 +165,7 @@ const searchUser = async(req, res) => {
 //     try {
 
 //         console.log(req.body) 
-        
+         
 //     } catch (error) {
 //         console.log(error.message)
 //     }
@@ -226,6 +229,24 @@ const addMembers = async(req, res) => {
 
 }
 
+const followUser = async(req, res) => {
+
+    const { userId } = req.params;
+    const { followerId } = req.body;
+
+    console.log(followerId)
+
+    User.findByIdAndUpdate(userId, { $push: { followers: followerId } }, { new: true })
+        .then(user => {
+            res.json(user);
+        })
+        .catch(err => {
+            console.error('Failed to follow user', err);
+            res.status(500).json({ message: 'Failed to follow user' });
+        });
+
+}
+
  
 
 module.exports = {
@@ -239,5 +260,6 @@ module.exports = {
     searchUser,
     createCommunity,
     addMembers,
-    loadProfile
+    loadProfile,
+    followUser
 }
