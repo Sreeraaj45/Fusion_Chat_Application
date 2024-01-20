@@ -11,7 +11,8 @@ Frontend:
 
 HTML
 CSS
-JavaScript
+JavaScript![Fusion Interface](https://github.com/Sreeraaj45/Fusion_Chat_Application/assets/103515099/b00194fc-64bf-4ea4-bb27-565cad818c51)
+
 EJS (Embedded JavaScript templating)
 Backend:
 
